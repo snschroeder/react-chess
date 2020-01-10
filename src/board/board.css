@@ -1,0 +1,15 @@
+.board {
+    position: relative;
+    max-width: 1000px;
+    max-height: 1000px;
+    min-width: 304px;
+    min-height: 304px;
+    height: 80vw;
+    width: 80vw;
+    margin: 0 auto;
+    margin-top: 20px;
+    background-image: url('/board-assets/chessboard.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 2px;
+}

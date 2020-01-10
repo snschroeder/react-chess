@@ -1,0 +1,173 @@
+.white-pawn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    width: 10vw;
+    height:10vw;
+    min-height: 38px;
+    min-width: 38px;
+    max-height: 125px;
+    max-width: 125px;
+    background-image: url('/piece-assets/white-pawn.png');
+    background-size: 100%;
+}
+
+.white-king {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    width: 10vw;
+    height:10vw;
+    min-height: 38px;
+    min-width: 38px;
+    max-height: 125px;
+    max-width: 125px;
+    background-image: url('/piece-assets/white-king.png');
+    background-size: 100%;
+}
+
+.white-queen {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    width: 10vw;
+    height:10vw;
+    min-height: 38px;
+    min-width: 38px;
+    max-height: 125px;
+    max-width: 125px;
+    background-image: url('/piece-assets/white-queen.png');
+    background-size: 100%;
+}
+.white-bishop {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    width: 10vw;
+    height:10vw;
+    min-height: 38px;
+    min-width: 38px;
+    max-height: 125px;
+    max-width: 125px;
+    background-image: url('/piece-assets/white-bishop.png');
+    background-size: 100%;
+}
+.white-knight {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    width: 10vw;
+    height:10vw;
+    min-height: 38px;
+    min-width: 38px;
+    max-height: 125px;
+    max-width: 125px;
+    background-image: url('/piece-assets/white-knight.png');
+    background-size: 100%;
+}
+.white-rook {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    width: 10vw;
+    height:10vw;
+    min-height: 38px;
+    min-width: 38px;
+    max-height: 125px;
+    max-width: 125px;
+    background-image: url('/piece-assets/white-rook.png');
+    background-size: 100%;
+}
+
+.black-pawn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    width: 10vw;
+    height:10vw;
+    min-height: 38px;
+    min-width: 38px;
+    max-height: 125px;
+    max-width: 125px;
+    background-image: url('/piece-assets/black-pawn.png');
+    background-size: 100%;
+}
+
+.black-king {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    width: 10vw;
+    height:10vw;
+    min-height: 38px;
+    min-width: 38px;
+    max-height: 125px;
+    max-width: 125px;
+    background-image: url('/piece-assets/black-king.png');
+    background-size: 100%;
+}
+
+.black-queen {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    width: 10vw;
+    height:10vw;
+    min-height: 38px;
+    min-width: 38px;
+    max-height: 125px;
+    max-width: 125px;
+    background-image: url('/piece-assets/black-queen.png');
+    background-size: 100%;
+}
+.black-bishop {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    width: 10vw;
+    height:10vw;
+    min-height: 38px;
+    min-width: 38px;
+    max-height: 125px;
+    max-width: 125px;
+    background-image: url('/piece-assets/black-bishop.png');
+    background-size: 100%;
+}
+.black-knight {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    width: 10vw;
+    height:10vw;
+    min-height: 38px;
+    min-width: 38px;
+    max-height: 125px;
+    max-width: 125px;
+    background-image: url('/piece-assets/black-knight.png');
+    background-size: 100%;
+}
+.black-rook {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    width: 10vw;
+    height:10vw;
+    min-height: 38px;
+    min-width: 38px;
+    max-height: 125px;
+    max-width: 125px;
+    background-image: url('/piece-assets/black-rook.png');
+    background-size: 100%;
+}
