@@ -65,20 +65,23 @@ export default class Piece extends React.Component {
   }
 
   render() {
+    const { dragPos, dragging } = this.state;
+    const { pos, squareSize, color } = this.props;
+
     const dragStyle = {
-      left: this.state.dragPos.x + 'px',
-      top: this.state.dragPos.y + 'px',
+      left: dragPos.x + 'px',
+      top: dragPos.y + 'px',
       zIndex: 9999,
     }
     const staticStyle = {
-      left: (this.props.pos.x * this.props.squareSize) + 'px',
-      top: (this.props.pos.y * this.props.squareSize) + 'px'
+      left: (pos.x * squareSize) + 'px',
+      top: (pos.y * squareSize) + 'px'
     }
     return (
       <div className={this.props.pieceType}
-        id={this.props.id}
-        color={this.props.color}
-        style={this.state.dragging ? dragStyle : staticStyle}
+        // id={this.props.id}
+        color={color}
+        style={dragging ? dragStyle : staticStyle}
         onMouseDown={(e)=> this.onMouseDown(e)}>
       </div >
     );

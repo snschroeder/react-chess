@@ -53,10 +53,17 @@ export default class Board extends React.Component {
     for (let i = 0; i < board.length; i += 1) {
       if (board[i] !== 0 && board[i] !== 7) {
         const color = Math.sign(board[i]) === 1 ? 'white' : 'black';
+        const x = i % 10;
+        const y = (i - x) / 10;
+        const id = `${color}-${chess.squares[i][0]}-${chess.pieces[Math.abs(board[i])]}`
+
+        console.log(id);
         const pieceInfo = {
           color,
+          id,
           pieceType: `${color}-${chess.pieces[Math.abs(board[i])]}`,
-          position: i,
+          notation: chess.squares[i],
+          position: {x: x - 1, y: y - 2},
         }
         pieceData.push(pieceInfo);
       }

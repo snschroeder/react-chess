@@ -10,7 +10,7 @@ export default class Piecelist extends React.Component {
         let piecesJSX = this.props.pieces.map(piece => {
             return <Piece
                 color={piece.color}
-                // square={piece.notation}
+                square={piece.notation}
                 pieceType={piece.pieceType}
                 // id={piece.id}
                 pos={piece.position}
