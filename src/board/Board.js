@@ -55,15 +55,17 @@ export default class Board extends React.Component {
         const color = Math.sign(board[i]) === 1 ? 'white' : 'black';
         const x = i % 10;
         const y = (i - x) / 10;
-        const id = `${color}-${chess.squares[i][0]}-${chess.pieces[Math.abs(board[i])]}`
-
-        console.log(id);
+        const piece = chess.pieces[Math.abs(board[i])];
+        const id = `${color}-${chess.squares[i][0]}-${piece}`
+        
         const pieceInfo = {
           color,
           id,
-          pieceType: `${color}-${chess.pieces[Math.abs(board[i])]}`,
+          pieceType: `${color}-${piece}`,
+          pieceClass: piece,
           notation: chess.squares[i],
           position: {x: x - 1, y: y - 2},
+          boardIndex: i,
         }
         pieceData.push(pieceInfo);
       }
@@ -72,12 +74,44 @@ export default class Board extends React.Component {
     return pieceData;
   }
 
+  translateArrayIndexToXY(index) {
+    const x = index % 10;
+    const y = (index - x) / 10;
+    return {x, y};
+  }
 
+  // can we store active piece in state, updating when a piece is moved?
+
+  findPieceByPos(position) {
+    const xyPos = this.translateArrayIndexToXY(position);
+    const { pieces } = this.state;
+
+    for (let i = 0; i < pieces.length; i += 1) {
+      if (pieces[i].x === xyPos.x && pieces[i].y === xyPos.y) {
+        return pieces[i];
+      }
+    }
+    return null;
+  }
+
+  onChange = (startPos, endPos) => {
+    const { squareSize } = this.state;
+
+    const start = this.translateArrayIndexToXY(startPos);
+    const end = this.translateArrayIndexToXY(endPos);
+
+    const snapX = Math.round((end.x / squareSize));
+    const snapY = Math.round((end.y / squareSize));
+
+    const move = chess.isValidMove(chess.board, )
+
+  }
 
 
   //update to use pieceId to find moving piece rather than position
 
-  onChange = (x, y, pieceId, piecePos) => {
+  // onChange = (x, y, piecePos) => {
+  //   const { squareSize } = this.state;
     // let piecePosArr = [piecePos.y, piecePos.x]
     // let snapX = Math.round((x / this.state.squareSize));
     // let snapY = Math.round((y / this.state.squareSize));
@@ -94,7 +128,7 @@ export default class Board extends React.Component {
     //   this.state.gameState.turn(piece, [snapY, snapX])
     //   this.updatePieceList();
     // }
-  }
+  // }
 
   render() {
     const { squareSize, pieces } = this.state;

@@ -24,7 +24,6 @@ export default class Piece extends React.Component {
     }
     let elem = document.elementFromPoint(e.pageX, e.pageY)
 
-
     let updatedRel = {
       x: e.pageX - elem.offsetLeft,
       y: e.pageY - elem.offsetTop
@@ -39,6 +38,8 @@ export default class Piece extends React.Component {
   }
 
   onMouseUp = e => {
+    const { x, y } = this.state;
+
     this.props.updatePos(this.state.dragPos.x, this.state.dragPos.y, this.props.id, this.props.pos)
     this.setState({
       dragging: false,
@@ -79,7 +80,7 @@ export default class Piece extends React.Component {
     }
     return (
       <div className={this.props.pieceType}
-        // id={this.props.id}
+        id={this.props.id}
         color={color}
         style={dragging ? dragStyle : staticStyle}
         onMouseDown={(e)=> this.onMouseDown(e)}>
