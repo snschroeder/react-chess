@@ -57,10 +57,11 @@ export default class Board extends React.Component {
         const y = (i - x) / 10;
         const piece = chess.pieces[Math.abs(board[i])];
         const id = `${color}-${chess.squares[i][0]}-${piece}`
-        
+
         const pieceInfo = {
           color,
           id,
+          value: board[i],
           pieceType: `${color}-${piece}`,
           pieceClass: piece,
           notation: chess.squares[i],
@@ -100,10 +101,12 @@ export default class Board extends React.Component {
     const start = this.translateArrayIndexToXY(startPos);
     const end = this.translateArrayIndexToXY(endPos);
 
+    const piece = this.findPieceByPos(start);
+
     const snapX = Math.round((end.x / squareSize));
     const snapY = Math.round((end.y / squareSize));
 
-    const move = chess.isValidMove(chess.board, )
+    const move = chess.isValidMove(chess.board, piece.color, piece.value, startPos, endPos);
 
   }
 
