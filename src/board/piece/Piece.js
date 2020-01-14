@@ -38,9 +38,11 @@ export default class Piece extends React.Component {
   }
 
   onMouseUp = e => {
-    const { x, y } = this.state;
+    const { dragPos } = this.state;
+    //const { x, y } = this.state.dragPos;
+    const { id, pos, updatePos } = this.props;
 
-    this.props.updatePos(this.state.dragPos.x, this.state.dragPos.y, this.props.id, this.props.pos)
+    updatePos(pos, id, dragPos)
     this.setState({
       dragging: false,
     });

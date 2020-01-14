@@ -7,7 +7,7 @@
     height: 80vw;
     width: 80vw;
     margin: 0 auto;
-    /* margin-top: 10px; */
+    margin-top: 20px;
     background-image: url('/board-assets/chessboard.png');
     background-size: contain;
     background-repeat: no-repeat;

@@ -84,29 +84,44 @@ export default class Board extends React.Component {
   // can we store active piece in state, updating when a piece is moved?
 
   findPieceByPos(position) {
-    const xyPos = this.translateArrayIndexToXY(position);
+    // console.log('searching')
+    console.log(position);
+    // const xyPos = this.translateArrayIndexToXY(position);
     const { pieces } = this.state;
 
     for (let i = 0; i < pieces.length; i += 1) {
-      if (pieces[i].x === xyPos.x && pieces[i].y === xyPos.y) {
+      if (pieces[i].position.x === position.x && pieces[i].position.y === position.y) {
+        // console.log(pieces[i].position);
         return pieces[i];
       }
     }
     return null;
   }
 
-  onChange = (startPos, endPos) => {
+  onChange = (startPos, id, endPos) => {
     const { squareSize } = this.state;
 
-    const start = this.translateArrayIndexToXY(startPos);
-    const end = this.translateArrayIndexToXY(endPos);
+    // console.log(endPos)
 
-    const piece = this.findPieceByPos(start);
+    // const start = this.translateArrayIndexToXY(startPos);
+    // const end = this.translateArrayIndexToXY(endPos);
 
-    const snapX = Math.round((end.x / squareSize));
-    const snapY = Math.round((end.y / squareSize));
+    const snapX = Math.round((endPos.x / squareSize));
+    const snapY = Math.round((endPos.y / squareSize));
 
-    const move = chess.isValidMove(chess.board, piece.color, piece.value, startPos, endPos);
+    const snappedPos = {x: snapX, y: snapY};
+    // console.log('snapped pos');
+    // console.log(snappedPos);
+
+    const piece = this.findPieceByPos(startPos);
+
+    console.log(snappedPos);
+
+    const moveIndex = ((snappedPos.y + 2) * 10) + snappedPos.x + 1;
+    console.log(moveIndex);
+
+    const move = chess.isValidMove(chess.board, piece.color, piece.value, piece.boardIndex, moveIndex);
+    console.log(move);
 
   }
 
