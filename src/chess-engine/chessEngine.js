@@ -211,11 +211,12 @@ const chess = {
   isValidMove(board, moveColor, reqPiece, startPos, move) {
     const side = moveColor === 'w' ? 1 : -1;
     if (side * reqPiece < 0) {
-      console.log(side)
-      console.log('fails here');
       return false;
     }
     if (board[move] === 7) {
+      return false;
+    }
+    if (moveColor !== this.currentTurn[0]) {
       return false;
     }
     if (move < 21 || move > 98) {
