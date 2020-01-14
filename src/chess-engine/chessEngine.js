@@ -211,6 +211,8 @@ const chess = {
   isValidMove(board, moveColor, reqPiece, startPos, move) {
     const side = moveColor === 'w' ? 1 : -1;
     if (side * reqPiece < 0) {
+      console.log(side)
+      console.log('fails here');
       return false;
     }
     if (board[move] === 7) {

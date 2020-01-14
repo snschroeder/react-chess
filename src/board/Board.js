@@ -52,7 +52,7 @@ export default class Board extends React.Component {
 
     for (let i = 0; i < board.length; i += 1) {
       if (board[i] !== 0 && board[i] !== 7) {
-        const color = Math.sign(board[i]) === 1 ? 'white' : 'black';
+        const color = Math.sign(board[i]) === 1 ? 'w' : 'b';
         const x = i % 10;
         const y = (i - x) / 10;
         const piece = chess.pieces[Math.abs(board[i])];

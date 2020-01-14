@@ -1,4 +1,4 @@
-.white-pawn {
+.w-pawn {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -13,7 +13,7 @@
     background-size: 100%;
 }
 
-.white-king {
+.w-king {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -28,7 +28,7 @@
     background-size: 100%;
 }
 
-.white-queen {
+.w-queen {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -42,7 +42,7 @@
     background-image: url('/piece-assets/white-queen.png');
     background-size: 100%;
 }
-.white-bishop {
+.w-bishop {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -56,7 +56,7 @@
     background-image: url('/piece-assets/white-bishop.png');
     background-size: 100%;
 }
-.white-knight {
+.w-knight {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -70,7 +70,7 @@
     background-image: url('/piece-assets/white-knight.png');
     background-size: 100%;
 }
-.white-rook {
+.w-rook {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -85,7 +85,7 @@
     background-size: 100%;
 }
 
-.black-pawn {
+.b-pawn {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -100,7 +100,7 @@
     background-size: 100%;
 }
 
-.black-king {
+.b-king {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -115,7 +115,7 @@
     background-size: 100%;
 }
 
-.black-queen {
+.b-queen {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -129,7 +129,7 @@
     background-image: url('/piece-assets/black-queen.png');
     background-size: 100%;
 }
-.black-bishop {
+.b-bishop {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -143,7 +143,7 @@
     background-image: url('/piece-assets/black-bishop.png');
     background-size: 100%;
 }
-.black-knight {
+.b-knight {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -157,7 +157,7 @@
     background-image: url('/piece-assets/black-knight.png');
     background-size: 100%;
 }
-.black-rook {
+.b-rook {
     position: absolute;
     bottom: 0;
     left: 0;
