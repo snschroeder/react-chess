@@ -11,6 +11,7 @@ export default class Board extends React.Component {
     squareSize: null,
     board: null,
     pieces: [],
+    pieceGraveyard: [],
   }
 
   board = React.createRef();
@@ -46,16 +47,36 @@ export default class Board extends React.Component {
     this.setState({ pieces: pieceList })
   }
 
-  udpateBoard = (pieceId, newBoardIndex) => {
-    console.log('fired')
-    const { pieces } = this.state;
+  altUpdateBoard = () => {
+    this.setState({
+      board: [...chess.board],
+    }, () =>{
+      this.updatePieceList();
+    })
+  }
+
+// TODO: combine into one for loop
+
+  altAltUpdateBoard = (pieceId, newBoardIndex) => {
+    const { pieces, board, pieceGraveyard } = this.state;
 
     const piecesClone = [...pieces];
 
+    for (let i = 0; i < piecesClone.length; i += 1) {      
+      if (piecesClone[i].boardIndex === newBoardIndex) {
+        if (piecesClone[i].id !== pieceId) {
+          pieceGraveyard.push(piecesClone.splice(i, 1));
+        } else if (piecesClone[i].id === pieceId) {
+          const x = newBoardIndex % 10;
+          const y = (newBoardIndex - x) / 10;
+          piecesClone[i].boardIndex = newBoardIndex;
+          piecesClone[i].position = {x: x - 1, y: y -2};
+        }
+      }
+    }
+
     for (let i = 0; i < piecesClone.length; i += 1) {
       if (piecesClone[i].id === pieceId) {
-        console.log(piecesClone[i].boardIndex)
-        console.log(newBoardIndex);
         const x = newBoardIndex % 10;
         const y = (newBoardIndex - x) / 10;
         piecesClone[i].boardIndex = newBoardIndex;
@@ -63,7 +84,7 @@ export default class Board extends React.Component {
       }
     }
     this.setState({
-      board: [...chess.board],
+      board: chess.board,
       pieces: piecesClone,
     })
   }
@@ -95,6 +116,7 @@ export default class Board extends React.Component {
 
     }
     return pieceData;
+
   }
 
   translateArrayIndexToXY(index) {
@@ -127,41 +149,14 @@ export default class Board extends React.Component {
     const piece = this.findPieceByPos(startPos);
     const moveIndex = ((snappedPos.y + 2) * 10) + snappedPos.x + 1;
 
-    console.log(chess.board);
-
     const move = chess.isValidMove(chess.board, piece.color, piece.value, piece.boardIndex, moveIndex);
-    console.log(moveIndex);
 
     if (move) {
       chess.turn(piece.color, piece.value, piece.boardIndex, moveIndex);
-      console.log(chess.board);
-      this.udpateBoard(piece.id, moveIndex);
+      this.altAltUpdateBoard(piece.id, moveIndex);
     }
 
   }
-
-
-  //update to use pieceId to find moving piece rather than position
-
-  // onChange = (x, y, piecePos) => {
-  //   const { squareSize } = this.state;
-    // let piecePosArr = [piecePos.y, piecePos.x]
-    // let snapX = Math.round((x / this.state.squareSize));
-    // let snapY = Math.round((y / this.state.squareSize));
-    // let piece;
-
-    // let move = this.state.gameState.isValidMove(piecePosArr, [snapY, snapX])
-
-    // if (move) {
-    //   this.state.gameState.board.playArea.forEach(row => row.forEach(col => {
-    //     if (col.position[0] === piecePos.x && col.position[1] === piecePos.y) {
-    //       piece = col.getPiece()
-    //     }
-    //   }))
-    //   this.state.gameState.turn(piece, [snapY, snapX])
-    //   this.updatePieceList();
-    // }
-  // }
 
   render() {
     const { squareSize, pieces } = this.state;
