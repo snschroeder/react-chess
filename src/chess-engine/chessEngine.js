@@ -234,10 +234,6 @@ const chess = {
     return isValid;
   },
 
-  // makeMove(board, moveColor, reqPiece, startPos, move) {
-
-  // },
-
   turn(color, reqPiece, startPos, move) {
     if (color !== this.currentTurn[0]) {
       return `Not ${color === 'w' ? 'white' : 'black'}'s turn`;
@@ -259,9 +255,21 @@ const chess = {
     this.history.push(hist);
     this.currentTurn.reverse();
   },
-  // undo {
 
-  // },
+  undo() {
+    if (this.history.length > 0) {
+      const lastIndex = this.history.length -1;
+      const last = this.history[lastIndex]
+      this.board[last.from] = last.moved;
+
+      if (last.cap) {
+        console.log('in the cap undo')
+        this.board[last.to] = last.cap;
+      } else {
+        this.board[last.to] = 0;
+      }
+    }
+  },
 
   // enPassant {
 

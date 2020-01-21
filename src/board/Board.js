@@ -1,8 +1,9 @@
 import React from 'react';
-import './board.css'
 import Piecelist from './pieceslist/Piecelist'
 
 import chess from '../chess-engine/chessEngine';
+
+import './board.css'
 
 export default class Board extends React.Component {
   state = {
@@ -50,27 +51,19 @@ export default class Board extends React.Component {
   altUpdateBoard = () => {
     this.setState({
       board: [...chess.board],
-    }, () =>{
+    }, () => {
       this.updatePieceList();
     })
   }
 
-// TODO: combine into one for loop
-
   altAltUpdateBoard = (pieceId, newBoardIndex) => {
-    const { pieces, board, pieceGraveyard } = this.state;
-
+    const { pieces, pieceGraveyard } = this.state;
     const piecesClone = [...pieces];
 
-    for (let i = 0; i < piecesClone.length; i += 1) {      
+    for (let i = 0; i < piecesClone.length; i += 1) {
       if (piecesClone[i].boardIndex === newBoardIndex) {
         if (piecesClone[i].id !== pieceId) {
           pieceGraveyard.push(piecesClone.splice(i, 1));
-        } else if (piecesClone[i].id === pieceId) {
-          const x = newBoardIndex % 10;
-          const y = (newBoardIndex - x) / 10;
-          piecesClone[i].boardIndex = newBoardIndex;
-          piecesClone[i].position = {x: x - 1, y: y -2};
         }
       }
     }
@@ -80,7 +73,7 @@ export default class Board extends React.Component {
         const x = newBoardIndex % 10;
         const y = (newBoardIndex - x) / 10;
         piecesClone[i].boardIndex = newBoardIndex;
-        piecesClone[i].position = {x: x - 1, y: y -2};
+        piecesClone[i].position = { x: x - 1, y: y - 2 };
       }
     }
     this.setState({
@@ -96,19 +89,18 @@ export default class Board extends React.Component {
     for (let i = 0; i < board.length; i += 1) {
       if (board[i] !== 0 && board[i] !== 7) {
         const color = Math.sign(board[i]) === 1 ? 'w' : 'b';
-        const x = i % 10;
-        const y = (i - x) / 10;
+        const position = this.translateArrayIndexToXY(i);
         const piece = chess.pieces[Math.abs(board[i])];
         const id = `${color}-${chess.squares[i][0]}-${piece}`
 
         const pieceInfo = {
           color,
           id,
+          position,
           value: board[i],
           pieceType: `${color}-${piece}`,
           pieceClass: piece,
           notation: chess.squares[i],
-          position: {x: x - 1, y: y - 2},
           boardIndex: i,
         }
         pieceData.push(pieceInfo);
@@ -122,7 +114,7 @@ export default class Board extends React.Component {
   translateArrayIndexToXY(index) {
     const x = index % 10;
     const y = (index - x) / 10;
-    return {x, y};
+    return { x: x - 1, y: y - 2 };
   }
 
   // can we store active piece in state, updating when a piece is moved?
@@ -144,7 +136,7 @@ export default class Board extends React.Component {
     const snapX = Math.round((endPos.x / squareSize));
     const snapY = Math.round((endPos.y / squareSize));
 
-    const snappedPos = {x: snapX, y: snapY};
+    const snappedPos = { x: snapX, y: snapY };
 
     const piece = this.findPieceByPos(startPos);
     const moveIndex = ((snappedPos.y + 2) * 10) + snappedPos.x + 1;
@@ -155,20 +147,31 @@ export default class Board extends React.Component {
       chess.turn(piece.color, piece.value, piece.boardIndex, moveIndex);
       this.altAltUpdateBoard(piece.id, moveIndex);
     }
+  }
 
+  undo = () => {
+    console.log(chess.board[51])
+    chess.undo();
+    console.log(chess.board[51]);
+    this.setState({
+      board: chess.board,
+    })
   }
 
   render() {
     const { squareSize, pieces } = this.state;
 
     return (
-      <div className="board" ref={this.board} >
+      <section className="play-area">
+        <div className="board" ref={this.board} >
 
-        <Piecelist
-          squareSize={squareSize}
-          pieces={pieces}
-          updatePos={this.onChange} />
-      </div>
+          <Piecelist
+            squareSize={squareSize}
+            pieces={pieces}
+            updatePos={this.onChange} />
+        </div>
+        <button type="button" className="undo-button" onClick={() => this.undo()}>Undo</button>
+      </section>
     );
   }
 }
