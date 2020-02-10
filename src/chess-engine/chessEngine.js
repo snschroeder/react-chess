@@ -166,6 +166,7 @@ const chess = {
     return moves;
   },
 
+  // O n^2 - can we make this O(n)?
   genShortDirtyMoves(board, color) {
     const piecesMoves = this.genDirtyMoves(board, color);
     const moves = [];
@@ -182,6 +183,7 @@ const chess = {
     return filteredAttacks.length > 0;
   },
 
+  // O n^2 - can we make this O(n)?
   genAllPseudoLegalMoves(board, moveColor) {
     const moves = this.genDirtyMoves(board, moveColor);
     const cleanMoves = moves.map((piece) => piece.filter((move, index) => {
@@ -197,10 +199,20 @@ const chess = {
     return cleanMoves;
   },
 
-  // genAllLegalMoves(board, moveColor) {
+  genAllLegalMoves(board, moveColor) {
+    const moves = this.genAllPseudoLegalMoves(board, moveColor);
+    const cleanMoves = moves.map((piece) => piece.filter((move, index) => {
+      if (index > 1) {
+        if (board[move] === 10 || board[move] === -10) {
+          return false;
+        }
+      }
+      return true;
+    }));
+    return cleanMoves;
+  },
 
-  // },
-
+  // O n^2 - can we make this O(n)?
   genShortPseudoLegalMoves(board, moveColor) {
     const moves = this.genAllPseudoLegalMoves(board, moveColor);
     const dirtyMoves = [];
@@ -223,7 +235,7 @@ const chess = {
       return false;
     }
     let isValid = false;
-    const moves = this.genAllPseudoLegalMoves(board, moveColor);
+    const moves = this.genAllLegalMoves(board, moveColor);
     moves.forEach((piece) => {
       if (piece[0] === reqPiece && piece[1] === startPos) {
         if (piece.splice(2).includes(move)) {
@@ -258,8 +270,7 @@ const chess = {
 
   undo() {
     if (this.history.length > 0) {
-      const lastIndex = this.history.length -1;
-      const last = this.history[lastIndex]
+      const last = this.history.pop();
       this.board[last.from] = last.moved;
 
       if (last.cap) {
@@ -270,6 +281,21 @@ const chess = {
       }
     }
   },
+
+  // undo() {
+  //   if (this.history.length > 0) {
+  //     const lastIndex = this.history.length -1;
+  //     const last = this.history[lastIndex]
+  //     this.board[last.from] = last.moved;
+
+  //     if (last.cap) {
+  //       console.log('in the cap undo')
+  //       this.board[last.to] = last.cap;
+  //     } else {
+  //       this.board[last.to] = 0;
+  //     }
+  //   }
+  // },
 
   // enPassant {
 
