@@ -1,4 +1,44 @@
 const chessBot = {
+  findBestMove(board, moveColor) {
+
+  },
+
+  miniMaxRoot(depth, game, isMaxPlayer) {
+    const color = isMaxPlayer ? 'w' : 'b';
+    const moves = game.genAllLegalMoves(game.board, color);
+    const bestEval = isMaxPlayer ? -999 : 999;
+    let best = { piece: null, startPos: null, move: null };
+
+    moves.forEach((piece) => {
+      piece.forEach((move, index) => {
+        if (index > 1) {
+          game.turn(color, piece[0], piece[1], move);
+          const val = this.miniMax(depth - 1, game, !isMaxPlayer);
+          game.undo();
+
+          if (val >= bestEval) {
+            bestEval = val;
+            best = { piece: piece[0], startPos: piece[1], move: move }
+          }
+        }
+      })
+    })
+    return best;
+  },
+
+  miniMax(depth, game, isMaxPlayer) {
+    if (depth === 0) {
+      return game.evaluateBoard(game.board);
+    }
+    const color = isMaxPlayer ? 'w' : 'b';
+    let bestEval = 0;
+    const moves = game.genAllLegalMoves(game.board, color);
+
+    if (color === 'w') {
+      bestEval = -999;
+    }
+  },
+
   findBestMove(gameState) {
     //let color = gameState.currentState[0].player;
     let allMoves = gameState.generateAllLegalMoves('white');
