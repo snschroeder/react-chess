@@ -2,6 +2,7 @@ import React from 'react';
 import Piecelist from './pieceslist/Piecelist'
 
 import chess from '../chess-engine/chessEngine';
+import chessBot from '../chess-engine/chessBot';
 
 import './board.css'
 
@@ -146,6 +147,11 @@ export default class Board extends React.Component {
     if (move) {
       chess.turn(piece.color, piece.value, piece.boardIndex, moveIndex);
       this.altAltUpdateBoard(piece.id, moveIndex);
+      const botMove = chessBot.miniMaxRoot(2, chess, false);
+      // const botPiece = this.findPieceByPos(botMove.startPos);
+      console.log(botMove);
+      // chess.turn('b', botMove.piece, botMove.startPos, botMove.move);
+      // this.altAltUpdateBoard(botPiece.id, botMove.move);
     }
   }
 
